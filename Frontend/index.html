@@ -2,33 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gimi AI - Professional</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Gimi AI</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+
     <div class="main-container">
+        
         <header>
-            <div class="brand">
-                <i class="fa-solid fa-robot"></i> Gimi AI
+            <div class="brand-area">
+                <img src="https://cdn-icons-png.flaticon.com/512/4712/4712027.png" alt="Logo" class="brand-logo">
+                <span class="brand-name">Gimi AI</span>
             </div>
-            <div class="status">
-                <span id="time">12:00</span>
-                <span id="battery">100%</span>
+            
+            <div class="status-bar">
+                <span id="clock">--:--</span>
+                <span id="battery-level">--%</span>
+                <i id="battery-icon" class="fa-solid fa-battery-three-quarters"></i>
             </div>
         </header>
 
         <main id="chat-box">
             </main>
 
+        <audio id="ai-voice-player" style="display:none;"></audio>
+
         <footer>
-            <input type="file" id="file-input" style="display: none;" accept=".pdf,.txt">
+            <input type="file" id="file-input" style="display: none;" accept=".pdf,.txt,.docx">
+            
             <div class="input-wrapper">
-                <button id="attach-btn" title="Upload Document"><i class="fa-solid fa-paperclip"></i></button>
-                
-                <input type="text" id="user-input" placeholder="Message Gimi AI...">
+                <button id="attach-btn"><i class="fa-solid fa-paperclip"></i></button>
+                <input type="text" id="user-input" placeholder="Message..." autocomplete="off">
                 <button id="mic-btn"><i class="fa-solid fa-microphone"></i></button>
                 <button id="send-btn"><i class="fa-solid fa-paper-plane"></i></button>
             </div>
