@@ -1,1 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gimi AI - Professional</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="main-container">
+        <header>
+            <div class="brand">
+                <i class="fa-solid fa-robot"></i> Gimi AI
+            </div>
+            <div class="status">
+                <span id="time">12:00</span>
+                <span id="battery">100%</span>
+            </div>
+        </header>
 
+        <main id="chat-box">
+            </main>
+
+        <footer>
+            <input type="file" id="file-input" style="display: none;" accept=".pdf,.txt">
+            <div class="input-wrapper">
+                <button id="attach-btn" title="Upload Document"><i class="fa-solid fa-paperclip"></i></button>
+                
+                <input type="text" id="user-input" placeholder="Message Gimi AI...">
+                <button id="mic-btn"><i class="fa-solid fa-microphone"></i></button>
+                <button id="send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
