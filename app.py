@@ -39,9 +39,9 @@ def configure_genai():
 configure_genai()
 
 # Models
-model = genai.GenerativeModel('models/gemini-2.0-flash-lite', system_instruction="You are Gimi AI. Answer helpful and concisely. Use HINGLISH for Hindi responses.")
+model = genai.GenerativeModel('models/gemini-2.5-flash-lite', system_instruction="You are Gimi AI. Answer helpful and concisely. Use HINGLISH for Hindi responses.")
 chat_session = model.start_chat(history=[])
-prompt_model = genai.GenerativeModel('models/gemini-2.0-flash-lite')
+prompt_model = genai.GenerativeModel('models/gemini-2.5-flash-lite')
 
 # --- Helper Functions ---
 
@@ -157,3 +157,4 @@ def execute_command():
 if __name__ == '__main__':
     # '0.0.0.0' is important for Render
     app.run(host='0.0.0.0', port=5000)
+
