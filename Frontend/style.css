@@ -1,162 +1,143 @@
-/* --- RESET & FONTS --- */
+/* --- GLOBAL RESET --- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    -webkit-tap-highlight-color: transparent; /* Removes blue highlight on tap */
 }
 
 body {
-    background-color: #000; /* Professional Dark BG */
-    color: #ffffff;
+    background-color: #000;
+    color: #fff;
     height: 100vh;
+    width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden; /* Prevents body scroll */
 }
 
-/* --- MAIN CONTAINER (Mobile Frame style) --- */
+/* --- MAIN CONTAINER --- */
 .main-container {
     width: 100%;
-    max-width: 99%; /* Desktop par zyada failne se rokna */
     height: 100%;
-    max-height: 99%;
-    background-color: #000000;
+    background-color: #000;
     display: flex;
     flex-direction: column;
     position: relative;
-    border-left: 1px solid #2a2a2a;
-    border-right: 1px solid #2a2a2a;
-    border-radius: 15px;
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
 }
 
-/* --- HEADER --- */
+/* --- HEADER / STATUS BAR --- */
 header {
-    padding: 15px 20px;
-    background-color: #1a1a1a;
-    border-bottom: 1px solid #2a2a2a;
+    padding: 10px 15px;
+    background-color: rgba(20, 20, 20, 0.95);
+    border-bottom: 1px solid #333;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    border-radius: 15px;
+    height: 60px;
+    z-index: 10;
 }
 
-.brand {
-    font-size: 1.1rem;
+/* Left Side: Brand */
+.brand-area {
     display: flex;
     align-items: center;
     gap: 10px;
-    color: #e0e0e0;
+}
+.brand-logo {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #00e676; /* Neon Border */
+}
+.brand-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #fff;
 }
 
-.status span {
+/* Right Side: Status */
+.status-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     font-size: 0.85rem;
-    margin-left: 12px;
-    color: #888;
+    color: #aaa;
+    font-weight: 500;
 }
+#battery-icon { font-size: 1rem; }
 
-/* --- CHAT BOX AREA --- */
+/* --- CHAT BOX --- */
 #chat-box {
-    flex: 1; /* Takes available space */
+    flex: 1;
     overflow-y: auto;
-    padding: 20px;
+    padding: 15px;
+    padding-bottom: 80px; /* Space for footer */
     display: flex;
     flex-direction: column;
-    gap: 20px; /* Space between messages */
+    gap: 15px;
     scroll-behavior: smooth;
-    background-color: #000;
 }
 
-/* Custom Scrollbar */
-#chat-box::-webkit-scrollbar { width: 6px; }
-#chat-box::-webkit-scrollbar-track { background: transparent; }
-#chat-box::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+/* Scrollbar Hide */
+#chat-box::-webkit-scrollbar { width: 4px; }
+#chat-box::-webkit-scrollbar-thumb { background: #333; }
 
-/* --- MESSAGE WRAPPERS (Alignment Logic) --- */
-/* Ye div puri width leta hai aur decide karta hai bubble left jayega ya right */
-.message-wrapper {
-    display: flex;
-    width: 100%;
-}
+/* --- BUBBLES --- */
+.message-wrapper { display: flex; width: 100%; margin-bottom: 5px; }
+.user-wrapper { justify-content: flex-end; }
+.bot-wrapper { justify-content: flex-start; }
 
-/* User Right Side */
-.user-wrapper {
-    justify-content: flex-end;
-}
-
-/* Bot Left Side */
-.bot-wrapper {
-    justify-content: flex-start;
-}
-
-/* --- MESSAGE BUBBLES (Styling) --- */
 .message-bubble {
     max-width: 80%;
     padding: 12px 16px;
-    font-size: 1rem;
-    line-height: 1.5;
-    position: relative;
+    font-size: 0.95rem;
+    line-height: 1.4;
     word-wrap: break-word;
-    animation: popIn 0.2s ease-out;
+    position: relative;
 }
 
-/* USER BUBBLE STYLE (Purple - Like Screenshot) */
 .user-bubble {
-    background-color: #6A0DAD; /* Professional Purple */
+    background: linear-gradient(135deg, #6A0DAD, #8A2BE2);
     color: white;
-    border-radius: 18px 18px 4px 18px; /* Right corner sharp */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    border-radius: 18px 18px 2px 18px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
 
-/* BOT BUBBLE STYLE (ChatGPT Style - Clean) */
 .bot-bubble {
-    background-color: transparent; /* No background color */
-    color: #e0e0e0; /* Light grey text */
-    padding-left: 0; /* Left align text */
-    border-radius: 18px 18px 18px 4px;
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    border-radius: 18px 18px 18px 2px;
+    border: 1px solid #333;
 }
+.bot-bubble.loading { color: #888; font-style: italic; background: transparent; border: none;}
 
-/* Bot Loading State */
-.bot-bubble.loading {
-    color: #888;
-    font-style: italic;
-}
+/* Markdown Elements */
+.bot-bubble p { margin-bottom: 8px; }
+.bot-bubble code { background: #333; padding: 2px 5px; border-radius: 4px; font-family: monospace; color: #00e676; }
+.bot-bubble pre { background: #000; padding: 10px; border-radius: 8px; overflow-x: auto; border: 1px solid #333; }
 
-/* IMAGE STYLING */
-.message-bubble img {
-    max-width: 100%;
-    border-radius: 12px;
-    margin-top: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    display: block;
-}
-
-/* Markdown Styling inside Bot Chat */
-.bot-bubble p { margin-bottom: 10px; }
-.bot-bubble code { background: #2a2a2a; padding: 2px 4px; border-radius: 4px; font-family: monospace; }
-.bot-bubble pre { background: #2a2a2a; padding: 10px; border-radius: 8px; overflow-x: auto; }
-
-/* --- FOOTER (INPUT) --- */
+/* --- FOOTER --- */
 footer {
-    padding: 15px 20px;
-    background-color: #000000;
-    border-top: 1px solid #2a2a2a;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 10px 15px;
+    background-color: #000; /* Solid black to hide content behind */
+    border-top: 1px solid #333;
 }
 
 .input-wrapper {
     display: flex;
-    gap: 10px;
-    background-color: #2a2a2a;
-    padding: 8px;
-    border-radius: 30px;
     align-items: center;
-    border: 1px solid #3a3a3a;
+    gap: 10px;
+    background-color: #1a1a1a;
+    padding: 5px 10px;
+    border-radius: 30px;
+    border: 1px solid #333;
 }
 
 input {
@@ -168,38 +149,32 @@ input {
     font-size: 1rem;
     outline: none;
 }
-input::placeholder { color: #888; }
 
 button {
-    background-color: #6A0DAD;
+    background: transparent;
     border: none;
-    color: white;
+    color: #aaa;
     width: 40px;
     height: 40px;
     border-radius: 50%;
+    font-size: 1.1rem;
     cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1rem;
     transition: 0.2s;
 }
-button:hover { background-color: #8A2BE2; }
-#mic-btn { background-color: #3a3a3a; color: #ccc; }
-#mic-btn.listening { background-color: #ff4757; color: white; animation: pulse 1.5s infinite; }
 
-/* Animations */
-@keyframes popIn {
-    from { opacity: 0; transform: translateY(10px) scale(0.98); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-}
-@keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.4); }
-    100% { box-shadow: 0 0 0 15px rgba(255, 71, 87, 0); }
-}
+button:active { transform: scale(0.9); }
+#send-btn { color: #00e676; }
+#mic-btn.listening { color: #ff4757; animation: pulse 1s infinite; }
 
-/* Responsive */
-@media (max-width: 600px) {
-    .main-container { border: none; }
-    .message-bubble { max-width: 88%; }
+@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+
+/* Desktop Adjustment (Agar PC pe khule to mobile jesa dikhe) */
+@media (min-width: 768px) {
+    .main-container {
+        max-width: 400px;
+        height: 90vh;
+        border: 1px solid #333;
+        border-radius: 20px;
+        overflow: hidden;
+    }
 }
