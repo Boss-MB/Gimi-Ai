@@ -37,10 +37,10 @@ def configure_genai():
 configure_genai()
 
 # Main Chat Model
-model = genai.GenerativeModel('models/gemini-1.5-flash', 
+model = genai.GenerativeModel('models/gemini-pro', 
                               system_instruction="You are Gimi AI. You are helpful, funny, and smart. Answer in Hinglish. Remember previous context and files uploaded by user.")
 chat_session = model.start_chat(history=[])
-prompt_model = genai.GenerativeModel('models/gemini-1.5-flash')
+prompt_model = genai.GenerativeModel('models/gemini-pro')
 
 # --- Helper Functions ---
 
@@ -149,4 +149,5 @@ def execute_command():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
+
 
